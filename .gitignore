@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+
+instance/
+static/uploads/
+
+.env
+venv/
+.env/
+
+.idea/
+.vscode/
+
+.db

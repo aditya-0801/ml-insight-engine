@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ML Insight Engine</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,Tahoma,sans-serif}
+body{
+min-height:100vh;
+background:linear-gradient(135deg,#0f172a,#1d4ed8,#06b6d4);
+background-size:300% 300%;
+animation:bg 10s ease infinite;
+display:flex;align-items:center;justify-content:center;padding:30px;color:#fff}
+@keyframes bg{0%{background-position:0 50%}50%{background-position:100% 50%}100%{background-position:0 50%}}
+.container{width:100%;max-width:1050px}
+.card{
+background:rgba(255,255,255,.12);
+backdrop-filter:blur(16px);
+border:1px solid rgba(255,255,255,.25);
+border-radius:22px;
+padding:35px;
+box-shadow:0 10px 30px rgba(0,0,0,.3)
+}
+h1{font-size:42px;text-align:center}
+.subtitle{text-align:center;margin:10px 0 30px;color:#dbeafe}
+.upload{
+border:3px dashed rgba(255,255,255,.5);
+border-radius:18px;padding:40px;text-align:center;
+transition:.3s;cursor:pointer}
+.upload:hover{background:rgba(255,255,255,.08);transform:scale(1.01)}
+input[type=file]{display:none}
+.btn{
+margin-top:20px;padding:14px 34px;border:none;border-radius:12px;
+background:#22c55e;color:white;font-size:18px;font-weight:bold;cursor:pointer;
+transition:.3s}
+.btn:hover{background:#16a34a;transform:translateY(-2px)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:35px}
+.feature{
+background:rgba(255,255,255,.1);padding:20px;border-radius:15px;text-align:center;
+transition:.3s}
+.feature:hover{transform:translateY(-6px);background:rgba(255,255,255,.18)}
+.feature i{font-size:40px;margin-bottom:12px;color:#fde047}
+.footer{text-align:center;margin-top:30px;color:#e2e8f0;font-size:14px}
+.error{margin:15px 0;padding:12px;background:#dc2626;border-radius:10px}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="card">
+<h1><i class="fa-solid fa-brain"></i> ML Insight Engine</h1>
+<p class="subtitle">Smart Data Analysis using Machine Learning</p>
+
+{% if error %}
+<div class="error">{{ error }}</div>
+{% endif %}
+
+<form action="/upload" method="POST" enctype="multipart/form-data">
+<label class="upload" for="file">
+<i class="fa-solid fa-cloud-arrow-up" style="font-size:60px"></i>
+<h2 style="margin-top:15px">Upload Your CSV Dataset</h2>
+<p>Click here to choose a CSV file</p>
+<input id="file" type="file" name="file" accept=".csv" required>
+<p id="filename" style="margin-top:15px;color:#fde68a;"></p>
+</label>
+
+<div style="text-align:center">
+<button class="btn" type="submit">
+<i class="fa-solid fa-play"></i> Analyze Dataset
+</button>
+</div>
+</form>
+
+<div class="grid">
+<div class="feature"><i class="fa-solid fa-table"></i><h3>Dataset Preview</h3><p>Instant dataset overview.</p></div>
+<div class="feature"><i class="fa-solid fa-chart-column"></i><h3>Accuracy Comparison</h3><p>Compare ML models.</p></div>
+<div class="feature"><i class="fa-solid fa-fire"></i><h3>Heatmap</h3><p>Correlation visualization.</p></div>
+<div class="feature"><i class="fa-solid fa-tree"></i><h3>Feature Importance</h3><p>Understand key features.</p></div>
+<div class="feature"><i class="fa-solid fa-border-all"></i><h3>Confusion Matrix</h3><p>Evaluate predictions.</p></div>
+<div class="feature"><i class="fa-solid fa-robot"></i><h3>Best Model</h3><p>Automatic model selection.</p></div>
+</div>
+
+<div class="footer">© 2026 ML Insight Engine | Flask • Scikit-Learn • Pandas</div>
+</div>
+</div>
+
+<script>
+const input=document.getElementById('file');
+const name=document.getElementById('filename');
+input.addEventListener('change',()=>{
+ if(input.files.length){
+   name.textContent="Selected: "+input.files[0].name;
+ }
+});
+</script>
+</body>
+</html>

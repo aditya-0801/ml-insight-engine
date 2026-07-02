@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>ML Insight Engine - Results</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,sans-serif}
+body{background:#0f172a;color:#fff;padding:30px}
+.container{max-width:1100px;margin:auto}
+h1{text-align:center;margin-bottom:30px}
+.section{
+background:#1e293b;
+border-left:6px solid #38bdf8;
+border-radius:15px;
+padding:25px;
+margin-bottom:28px;
+box-shadow:0 10px 20px rgba(0,0,0,.3)
+}
+.section h2{margin-bottom:18px;color:#38bdf8}
+table{width:100%;border-collapse:collapse}
+th,td{border:1px solid #475569;padding:10px;text-align:center}
+img{width:100%;border-radius:10px;border:1px solid #334155}
+.badge{display:inline-block;background:#22c55e;padding:12px 22px;border-radius:25px;font-size:18px;font-weight:bold}
+.back{
+display:inline-block;
+margin-top:25px;
+padding:12px 22px;
+background:#2563eb;
+color:#fff;
+text-decoration:none;
+border-radius:10px
+}
+ul{margin-left:20px}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<h1>📊 ML Insight Engine Analysis Report</h1>
+
+<div class="section">
+<h2>1️⃣ Dataset Information</h2>
+<p><b>Total Rows:</b> {{ rows }}</p><br>
+<p><b>Total Columns:</b> {{ columns }}</p><br>
+<p><b>Column Names:</b></p>
+<ul>
+{% for col in column_names %}
+<li>{{ col }}</li>
+{% endfor %}
+</ul>
+</div>
+
+<div class="section">
+<h2>2️⃣ Dataset Preview</h2>
+{{ preview|safe }}
+</div>
+
+<div class="section">
+<h2>3️⃣ Best Machine Learning Model</h2>
+<p class="badge">{{ best_model }}</p>
+
+<h3 style="margin-top:20px;">Accuracy Comparison</h3>
+<table>
+<tr>
+<th>Model</th>
+<th>Accuracy (%)</th>
+</tr>
+{% for model,score in accuracy.items() %}
+<tr>
+<td>{{ model }}</td>
+<td>{{ score }}</td>
+</tr>
+{% endfor %}
+</table>
+</div>
+
+<div class="section">
+<h2>4️⃣ Correlation Heatmap</h2>
+<img src="/{{ heatmap }}">
+</div>
+
+<div class="section">
+<h2>5️⃣ Model Accuracy Graph</h2>
+<img src="/{{ accuracy_plot }}">
+</div>
+
+<div class="section">
+<h2>6️⃣ Confusion Matrix</h2>
+<img src="/{{ confusion_plot }}">
+</div>
+
+{% if feature_plot %}
+<div class="section">
+<h2>7️⃣ Feature Importance</h2>
+<img src="/{{ feature_plot }}">
+</div>
+{% endif %}
+
+<div style="text-align:center">
+<a href="/" class="back">⬅ Analyze Another Dataset</a>
+</div>
+
+</div>
+
+</body>
+</html>
